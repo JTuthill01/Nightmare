@@ -69,7 +69,12 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>$(ProjectDir);$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -102,10 +107,13 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)Deps\Release\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)Deps\Release\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-audio.lib;sfml-graphics.lib;sfml-main.lib;sfml-network.lib;sfml-system.lib;sfml-window.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -123,37 +131,37 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimationComponent.cpp" />
-    <ClCompile Include="Button.cpp" />
-    <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Component\AnimationComponent.cpp" />
+    <ClCompile Include="Resources\Button.cpp" />
+    <ClCompile Include="Entity\Entity.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="Level.cpp" />
+    <ClCompile Include="States\GameState.cpp" />
+    <ClCompile Include="Level\Level.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainMenuState.cpp" />
-    <ClCompile Include="MovementComponent.cpp" />
-    <ClCompile Include="OrcLevel.cpp" />
-    <ClCompile Include="Orcs.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="States.cpp" />
+    <ClCompile Include="States\MainMenuState.cpp" />
+    <ClCompile Include="Component\MovementComponent.cpp" />
+    <ClCompile Include="Level\OrcLevel.cpp" />
+    <ClCompile Include="Entity\Orcs.cpp" />
+    <ClCompile Include="Entity\Player.cpp" />
+    <ClCompile Include="States\States.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeaderFile Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">stdafx.hpp</PrecompiledHeaderFile>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationComponent.hpp" />
-    <ClInclude Include="Button.hpp" />
-    <ClInclude Include="Entity.hpp" />
+    <ClInclude Include="Component\AnimationComponent.hpp" />
+    <ClInclude Include="Resources\Button.hpp" />
+    <ClInclude Include="Entity\Entity.hpp" />
     <ClInclude Include="Game.hpp" />
-    <ClInclude Include="GameState.hpp" />
-    <ClInclude Include="Level.hpp" />
-    <ClInclude Include="MainMenuState.hpp" />
-    <ClInclude Include="MovementComponent.hpp" />
-    <ClInclude Include="OrcLevel.hpp" />
-    <ClInclude Include="Orcs.hpp" />
-    <ClInclude Include="Player.hpp" />
-    <ClInclude Include="States.hpp" />
+    <ClInclude Include="States\GameState.hpp" />
+    <ClInclude Include="Level\Level.hpp" />
+    <ClInclude Include="States\MainMenuState.hpp" />
+    <ClInclude Include="Component\MovementComponent.hpp" />
+    <ClInclude Include="Level\OrcLevel.hpp" />
+    <ClInclude Include="Entity\Orcs.hpp" />
+    <ClInclude Include="Entity\Player.hpp" />
+    <ClInclude Include="States\States.hpp" />
     <ClInclude Include="stdafx.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
