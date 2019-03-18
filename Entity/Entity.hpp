@@ -1,35 +1,33 @@
 #pragma once
-#include "Player.hpp"
 #include <Component/AnimationComponent.hpp>
 #include <Component/MovementComponent.hpp>
+#include <Entity/Player.hpp>
 
 class Entity
 {
 public:
-	Entity(sf::RenderWindow * window, std::stack<Entity*>* entity);
-	~Entity();
+	Entity();
+	virtual ~Entity();
 
 	virtual void update(const float& deltaTime) = 0;
 	virtual void render(sf::RenderTarget& target) = 0;
 
-	virtual void updateAnimations(const float & deltaTime);
-	virtual bool collision(sf::Sprite sprite);
-
-	virtual void createMovementComponent(const float max_velocity, const float acceleration, const float deceleration);
-	virtual void createAnimationComponent(sf::Texture & texture_sheet);
-	virtual void move(const float direction_x, const float direction_y, const float & deltaTime);
-
 protected:
-	std::stack<Entity*>* pEntity;
+	bool collision(sf::Sprite& sprite);
+
+	void updateAnimations(sf::Sprite& sprite, const float& deltaTime);
+	void initTextures(sf::Texture& texture, sf::Sprite& sprite, const std::string& filePath);
+	void move(const float direction_x, const float direction_y, const float  & deltaTime);
+	void createMovementComponent(const float max_velocity,
+		const float acceleration, const float deceleration);
+	void createAnimationComponent(sf::Texture& texture_sheet);
 
 	bool pIsAttacking;
 
-	sf::RenderWindow* pWindow;
 	sf::Sprite pSprite;
-	sf::Texture pTexture;
 
 	Player pPlayer;
-	AnimationComponent* pAnimationComponent;
 	MovementComponent* pMovementComponent;
+	AnimationComponent* pAnimationComponent;
 };
 

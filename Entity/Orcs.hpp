@@ -6,8 +6,6 @@ class Orcs :
 {
 public:
 	Orcs();
-	Orcs(std::vector<sf::Texture> &texture, sf::Vector2f position, sf::Vector2u windowBounds);
-	Orcs(sf::RenderWindow * window, std::stack<Entity*>* entity);
 	virtual ~Orcs();
 
 	// Inherited via Entity
@@ -15,8 +13,7 @@ public:
 	virtual void render(sf::RenderTarget & target) override;
 
 private:
-	std::vector<sf::Texture>* mOrcTexture;
 	sf::Sprite mOrcSprite;
-	sf::Vector2u mWindowBounds;
+	sf::Texture mOrcTexture;
 };
 
