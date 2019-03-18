@@ -28,15 +28,10 @@ Player::Player(float x, float y, sf::Texture & texture_sheet)
 	this->mPlayerSprite.setPosition(0.f, 750.f);
 }
 
-Player::~Player() {}
+Player::~Player() = default;
 
 
-void Player::render(sf::RenderTarget & target)
-{
-	mKeyTime++;
-
-	target.draw(this->mPlayerSprite);
-}
+void Player::render(sf::RenderTarget & target) { target.draw(this->mPlayerSprite); }
 
 void Player::updateAttack()
 {
@@ -57,6 +52,8 @@ void Player::createAnimationComponent(sf::Texture & texture_sheet)
 
 void Player::update(const float& deltaTime)
 {
+	mKeyTime++;
+
 	this->pMovementComponent->update(deltaTime);
 
 	this->updateAttack();
